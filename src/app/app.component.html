@@ -1,0 +1,35 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav  mode="side" opened> 
+    <ng-container *ngIf="!isLoginPage">
+      <mat-nav-list >
+        <ng-container *ngFor="let route of routes">
+          <a *ngIf="route.path !== 'login' && route.path !==''" 
+            mat-list-item  
+            [routerLink]="route.path" class="d-flex align-items-center">  
+            <mat-icon matListItemIcon>{{ route.data?.icon  }}</mat-icon>    
+            <div matListItemTitle>{{ route.data?.label }} </div>       
+          </a>
+        </ng-container>
+      </mat-nav-list>
+     </ng-container>
+  </mat-sidenav>
+  <mat-sidenav-content >
+    <div style="height:100vh;" >
+      <ng-container *ngIf="!isLoginPage">
+        <mat-toolbar color="primary">
+          <button  mat-icon-button 
+                   aria-label="Menu"
+                   (click)="sidenav.toggle()" >
+          <mat-icon>menu</mat-icon>
+        </button>  
+        <span class="example-spacer"></span>
+        <button mat-stroked-button  class="rounded-circle min-auto" [matMenuTriggerFor]="menu">SO</button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="/login">Logout</button>
+      </mat-menu>
+    </mat-toolbar>
+    </ng-container>
+    <router-outlet ></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

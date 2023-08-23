@@ -1,0 +1,45 @@
+
+<h1 mat-dialog-title>Edit Task</h1>
+<div mat-dialog-content>
+   <form [formGroup]="editTaskForm">
+    <mat-form-field  appearance="outline" class="w-100">
+        <mat-label>property</mat-label>
+      <input matInput placeholder="property" formControlName="property">
+    </mat-form-field>
+    <mat-form-field  appearance="outline" class="w-100">
+        <mat-label>location</mat-label>
+      <input matInput placeholder="location" formControlName="location">
+    </mat-form-field>
+   
+<div class="row">
+    <div class="col">
+        <mat-form-field  appearance="outline" class="w-100">
+            <mat-label>Username</mat-label>
+            <mat-select formControlName="username">
+              <mat-option *ngFor="let user of users" [value]="user" >{{ user }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+    
+</div>
+<div class="col">
+      <mat-form-field  appearance="outline" class="w-100">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status">
+          <mat-option *ngFor="let status of statusOptions" [value]="status" >{{ status }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    </div>
+      <mat-form-field  appearance="outline" class="w-100">
+        <mat-label>taskdetail</mat-label>
+      <input matInput placeholder="taskdetail" formControlName="taskdetail">
+    </mat-form-field>
+  </form>
+    <div class="col mt-3">
+     <button mat-button (click)="onCancelClick()" class="me-2">Cancel</button>
+     <button mat-raised-button color="primary" (click)="onEditTaskClick()">Save Changes</button>
+      
+    </div>
+</div> 
+
+

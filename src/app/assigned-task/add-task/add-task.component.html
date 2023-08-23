@@ -1,0 +1,41 @@
+<h2 mat-dialog-title>Add New Task</h2>
+<mat-dialog-content>
+  <form [formGroup]="addTaskForm">
+   
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>property</mat-label>
+      <input matInput placeholder="property" formControlName="property">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>location</mat-label>
+      <input matInput placeholder="location" formControlName="location">
+    </mat-form-field>
+    <div class="row">
+      <div class="col-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>username</mat-label>
+          <mat-select formControlName="username">
+            <mat-option *ngFor="let user of usernameOptions" [value]="user">{{ user }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>status</mat-label>
+          <mat-select formControlName="status">
+            <mat-option *ngFor="let status of statusOptions" [value]="status">{{ status }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>taskdetail</mat-label>
+      <textarea matInput placeholder="taskdetail" formControlName="taskdetail"></textarea>
+    </mat-form-field>
+   
+    <div class="mt-3">
+      <button mat-button (click)="onCancelClick()" class="me-2">Cancel</button>
+      <button mat-raised-button color="primary" (click)="onAddTaskClick()">Add Task</button>
+    </div>
+  </form>
+</mat-dialog-content>

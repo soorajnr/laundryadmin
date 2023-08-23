@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Add New User</h2>
+<mat-dialog-content>
+  <form [formGroup]="addUserForm">
+   
+    <mat-form-field>
+      <input matInput placeholder="Username" formControlName="username">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Password" formControlName="password">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Location" formControlName="location">
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onAddUserClick()">Add User</button>
+</mat-dialog-actions>
