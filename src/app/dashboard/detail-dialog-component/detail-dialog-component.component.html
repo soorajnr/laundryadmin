@@ -1,0 +1,86 @@
+
+<h2 mat-dialog-title>Details</h2>
+<mat-dialog-content class="mat-typography">  
+  <table class="table table-striped table-hover">
+    <tr>
+      <td>Product</td>
+      <td>{{ data.Products }}</td>
+    </tr>
+    <tr>
+      <td>OderID</td>
+      <td>{{ data.OderID  }}</td>
+    </tr>
+    <tr>
+      <td>FromDate </td>
+      <td>{{data.FromDate  | date: 'fullDate' }}</td>
+    </tr>
+    <tr>
+      <td>ToDate </td>
+      <td>{{data.ToDate  | date: 'fullDate' }}</td>
+    </tr>
+    <tr>
+      <td>Technician </td>
+      <td>{{data.Technician}}</td>
+    </tr>
+    <tr>
+      <td>Status </td>
+      <td>{{data.Status}}</td>
+    </tr>
+    <tr>
+      <td>CompanyDetails </td>
+      <td>{{data.CompanyDetails}}</td>
+    </tr>
+    <tr>
+      <td>CustomerDetails </td>
+      <td>{{data.CustomerDetails}}</td>
+    </tr>
+    <tr>
+      <td>WorkMode </td>
+      <td>{{data.WorkMode}}</td>
+    </tr>
+    <tr>
+      <td>TaskName </td>
+      <td>{{data.TaskName}}</td>
+    </tr>
+    <tr>
+      <td>PaymentMode </td>
+      <td>{{data.PaymentMode}}</td>
+    </tr>
+    <tr>
+      <td>CustomerName </td>
+      <td>{{data.CustomerName}}</td>
+    </tr>
+    <tr>
+      <td>CustomerPhoneNo </td>
+      <td>{{data.CustomerPhoneNo}}</td>
+    </tr>
+    <tr>
+      <td>CustomerSignature </td>
+      <td>{{data.CustomerSignature}}</td>
+    </tr>
+    <tr>
+      <td>TechnicianSignature </td>
+      <td>{{data.TechnicianSignature}}</td>
+    </tr>
+    <tr>
+      <td>TechnicianPhoneNo </td>
+      <td>{{data.TechnicianPhoneNo}}</td>
+    </tr>
+    <tr>
+      <td>FieldBeforePhoto </td>
+      <td>{{data.FieldBeforePhoto}}</td>
+    </tr>
+    <tr>
+      <td>FieldAfterPhoto </td>
+      <td>{{data.FieldAfterPhoto}}</td>
+    </tr>
+  </table>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close >Cancel</button>
+    <button mat-raised-button color="primary" (click)="downloadPdf()" *ngIf="data.Status == 'Completed'" class="ms-2">Download as PDF</button>
+
+</mat-dialog-actions>
+
+

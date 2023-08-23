@@ -1,0 +1,22 @@
+
+ <h1 mat-dialog-title>Edit User</h1>
+<div mat-dialog-content>
+   <form [formGroup]="editUserForm">
+    <mat-form-field class="w-100">
+      <input matInput placeholder="Username" formControlName="username">
+    </mat-form-field>
+    <mat-form-field class="w-100">
+      <input matInput placeholder="Password" formControlName="password">
+    </mat-form-field>
+    <mat-form-field class="w-100">
+      <input matInput placeholder="Location" formControlName="location">
+    </mat-form-field>
+  </form>
+    <div class="col mt-3">
+     <button mat-button (click)="onCancelClick()">Cancel</button>
+     <button mat-raised-button color="primary" (click)="onEditUserClick()">Save Changes</button>
+      
+    </div>
+</div> 
+
+

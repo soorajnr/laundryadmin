@@ -1,0 +1,9 @@
+
+<h1 mat-dialog-title>Confirm Delete</h1>
+<div mat-dialog-content>
+    Are you sure you want to delete user "{{ user.username}}"?
+    <div class="col mt-4">
+        <button mat-button (click)="onCancelClick()" class="me-2">Cancel</button>
+        <button mat-raised-button color="warn" (click)="onDeleteUserClick()">Delete</button>
+    </div>
+</div>
