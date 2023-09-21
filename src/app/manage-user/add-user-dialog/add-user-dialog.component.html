@@ -6,10 +6,24 @@
       <input matInput placeholder="Username" formControlName="username">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Password" formControlName="password">
+      <input matInput placeholder="First Name" formControlName="first_name">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Location" formControlName="location">
+      <input matInput placeholder="Last Name" formControlName="last_name">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Email ID" formControlName="email">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Password" formControlName="password1">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Re enter Password" formControlName="password2">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="User Role" formControlName="user_role">
+        <mat-option *ngFor="let role of userRoles" [value]="role">{{ role }}</mat-option>
+      </mat-select>
     </mat-form-field>
   </form>
 </mat-dialog-content>

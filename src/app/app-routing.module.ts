@@ -5,6 +5,7 @@ import { ManageUserComponent } from './manage-user/manage-user.component';
 import { ReportsComponent } from './reports/reports.component';
 import { AssignedTaskComponent } from './assigned-task/assigned-task.component';
 import { LoginComponent } from './login/login.component';
+import { OnprocessComponent } from './on-process/on-process.component';
 
  interface CustomRoute extends Route {
   data?: {
@@ -19,6 +20,7 @@ export const routes: CustomRoute[] = [
   { path: 'manageuser', component: ManageUserComponent, data: { label: 'Manage User', icon: 'group' } },
   { path: 'assignedtask', component: AssignedTaskComponent, data: { label: 'Assigned Task', icon: 'summarize' } },
   { path: 'reports', component: ReportsComponent, data: { label: 'Reports', icon: 'summarize' } },
+  { path: 'onprocesstask', component: OnprocessComponent, data: { label: 'On process Task', icon: 'summarize' } },
 ];
 
 @NgModule({

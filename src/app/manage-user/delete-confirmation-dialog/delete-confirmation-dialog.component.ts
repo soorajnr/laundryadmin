@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { MatDialogRef , MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { PeriodicElement } from '../usermodel';
-
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-delete-confirmation-dialog',
   templateUrl: './delete-confirmation-dialog.component.html',
@@ -12,7 +12,8 @@ export class DeleteConfirmationDialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<DeleteConfirmationDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public user: PeriodicElement // Inject the selected user
+    @Inject(MAT_DIALOG_DATA) public user: PeriodicElement ,// Inject the selected user
+    private http: HttpClient
   ) {}
 
   onCancelClick(): void {
@@ -20,8 +21,16 @@ export class DeleteConfirmationDialogComponent {
   }
 
   onDeleteUserClick(): void {
-    // Emit the deleted user data
-    this.deleteUserEvent.emit(this.user);
-    this.dialogRef.close();
+    // Send a DELETE request to the backend to delete the user
+    this.http.delete<void>(`https://albecoservice.com/albecoproject/userapi/delete-user/${this.user.id}`).subscribe(
+      () => {
+        console.log(`User with ID ${this.user.id} deleted successfully`);
+        this.deleteUserEvent.emit(this.user); // Emit the deleted user data
+        this.dialogRef.close();
+      },
+      (error) => {
+        console.error(`Error deleting user with ID ${this.user.id}:`, error);
+      }
+    );
   }
 }

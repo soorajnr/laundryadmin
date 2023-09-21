@@ -13,10 +13,8 @@ export interface PeriodicElement {
     location : string; 
     CustomerPhoneNo : string;
     customer_signature : string; 
-    
     employee_signature : string;
     TechnicianPhoneNo : string;
     before_photo1 : string;
     after_photo1 : string;
-    work_completed:boolean;
   }

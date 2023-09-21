@@ -1,86 +1,58 @@
-
 <h2 mat-dialog-title>Details</h2>
-<mat-dialog-content class="mat-typography">  
+<mat-dialog-content class="mat-typography">
   <table class="table table-striped table-hover">
     <tr>
       <td>Product</td>
-      <td>{{ data.Products }}</td>
+      <td>{{ data.descreption }}</td>
     </tr>
     <tr>
-      <td>OderID</td>
-      <td>{{ data.OderID  }}</td>
+      <td>Order ID</td>
+      <td>{{ data.id }}</td>
     </tr>
     <tr>
-      <td>FromDate </td>
-      <td>{{data.FromDate  | date: 'fullDate' }}</td>
+      <td>Date of Start</td>
+      <td>{{ data.assigned_date | date: 'fullDate' }}</td>
     </tr>
     <tr>
-      <td>ToDate </td>
-      <td>{{data.ToDate  | date: 'fullDate' }}</td>
+      <td>Date of Completion</td>
+      <td>{{ data.completion_date | date: 'fullDate' }}</td>
     </tr>
     <tr>
-      <td>Technician </td>
-      <td>{{data.Technician}}</td>
+      <td>Technician</td>
+      <td>{{ data.Technician }}</td>
     </tr>
     <tr>
-      <td>Status </td>
-      <td>{{data.Status}}</td>
+      <td>Status</td>
+      <td>{{ data.Status }}</td>
     </tr>
     <tr>
-      <td>CompanyDetails </td>
-      <td>{{data.CompanyDetails}}</td>
+      <td>Company Details</td>
+      <td>{{ data.property }}</td>
     </tr>
     <tr>
-      <td>CustomerDetails </td>
-      <td>{{data.CustomerDetails}}</td>
+      <td>Customer Details</td>
+      <td>{{ data.CustomerDetails }}</td>
     </tr>
-    <tr>
-      <td>WorkMode </td>
-      <td>{{data.WorkMode}}</td>
-    </tr>
-    <tr>
-      <td>TaskName </td>
-      <td>{{data.TaskName}}</td>
-    </tr>
-    <tr>
-      <td>PaymentMode </td>
-      <td>{{data.PaymentMode}}</td>
-    </tr>
-    <tr>
-      <td>CustomerName </td>
-      <td>{{data.CustomerName}}</td>
-    </tr>
-    <tr>
-      <td>CustomerPhoneNo </td>
-      <td>{{data.CustomerPhoneNo}}</td>
-    </tr>
-    <tr>
-      <td>CustomerSignature </td>
-      <td>{{data.CustomerSignature}}</td>
-    </tr>
-    <tr>
-      <td>TechnicianSignature </td>
-      <td>{{data.TechnicianSignature}}</td>
-    </tr>
-    <tr>
-      <td>TechnicianPhoneNo </td>
-      <td>{{data.TechnicianPhoneNo}}</td>
-    </tr>
-    <tr>
-      <td>FieldBeforePhoto </td>
-      <td>{{data.FieldBeforePhoto}}</td>
-    </tr>
-    <tr>
-      <td>FieldAfterPhoto </td>
-      <td>{{data.FieldAfterPhoto}}</td>
-    </tr>
+    <!-- Add more rows as needed -->
   </table>
 
+  <div class="image-container">
+    <div class="image">
+      <!-- <img src="{{ data.customer_signature.url }}" alt="Customer Signature"> -->
+      <!-- <img [src]="https://albecoservice.com/albecoproject/albecoproject/media/images/images/customer_signature_EmDPlA5.png" alt="Customer Signature"> -->
+      <img [src]=" 'https://albecoservice.com/albecoproject/albecoproject/media/images/customer_signature_EmDPlA5.png' " alt="Customer Signature">
+
+      <p>Customer Signature</p>
+    </div>
+    <div class="image">
+      <img src="{{ data.employee_signature }}" alt="Technician Signature">
+      <p>Technician Signature</p>
+    </div>
+    <!-- Add more images as needed -->
+  </div>
 </mat-dialog-content>
+
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close >Cancel</button>
-    <button mat-raised-button color="primary" (click)="downloadPdf()" *ngIf="data.Status == 'Completed'" class="ms-2">Download as PDF</button>
-
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button color="primary" (click)="downloadPdf()" *ngIf="data.work_completed" class="ms-2">Download as PDF</button>
 </mat-dialog-actions>
-
-

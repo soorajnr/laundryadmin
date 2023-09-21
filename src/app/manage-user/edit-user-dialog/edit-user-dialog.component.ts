@@ -19,8 +19,8 @@ export class EditUserDialogComponent {
   ) {
     this.editUserForm = this.formBuilder.group({
       username: [user.username, Validators.required],
-      password: [user.password, Validators.required],
-      location: [user.location, Validators.required]
+      password1: [user.password1, Validators.required],
+      
     });
   }
 

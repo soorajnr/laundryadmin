@@ -7,169 +7,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { DetailDialogComponentComponent } from './detail-dialog-component/detail-dialog-component.component';
 import { PeriodicElement } from './dashboardmodel';
 import { MatPaginator } from '@angular/material/paginator';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  { 
-    Products: 'Wirpool',
-    OderID: 1235, 
-    FromDate: new Date('2023-08-01'), 
-    ToDate: new Date('2023-08-05'),    
-    Status: 'Assigned',
-    CompanyDetails: 'Abelco Equipment Trading LLC 1006597086 abelco.me 9HW8+CQ8 - Shop #1 - ??????? - ????? -  United Arab Emirates admin@abelco.me',
-    CustomerDetails :'Ajman - United Arab Emirates',
-    WorkMode :'New Installation',
-    TaskName :'Trial',
-    PaymentMode: 'AMC',
-    Technician: 'Sooraj', 
-    CustomerName: 'Deepa', 
-    CustomerPhoneNo: 'N/A', 
-    CustomerSignature: 'N/A', 
-    TechnicianSignature:'N/A',
-    TechnicianPhoneNo:'N/A',
-    FieldBeforePhoto:'N/A',
-    FieldAfterPhoto:'N/A'
-  },
-  { 
-    Products: 'HP',
-    OderID: 1234, 
-    FromDate: new Date('2023-08-01'), 
-    ToDate: new Date('2023-08-05'),    
-    Status: 'Completed',
-    CompanyDetails: 'Abelco Equipment Trading LLC 1006597086 abelco.me 9HW8+CQ8 - Shop #1 - ??????? - ????? -  United Arab Emirates admin@abelco.me',
-    CustomerDetails :'Ajman - United Arab Emirates',
-    WorkMode :'New Installation',
-    TaskName :'Trial',
-    PaymentMode: 'AMC',
-    Technician: 'Kiran', 
-    CustomerName: 'Deepa', 
-    CustomerPhoneNo: 'N/A', 
-    CustomerSignature: 'N/A', 
-    TechnicianSignature:'N/A',
-    TechnicianPhoneNo:'N/A',
-    FieldBeforePhoto:'N/A',
-    FieldAfterPhoto:'N/A'
-  },
-  { 
-    Products: 'HP',
-    OderID: 1237, 
-    FromDate: new Date('2023-08-03'), 
-    ToDate: new Date('2023-08-09'),    
-    Status: 'Completed',
-    CompanyDetails: 'Abelco Equipment Trading LLC 1006597086 abelco.me 9HW8+CQ8 - Shop #1 - ??????? - ????? -  United Arab Emirates admin@abelco.me',
-    CustomerDetails :'Ajman - United Arab Emirates',
-    WorkMode :'New Installation',
-    TaskName :'Trial',
-    PaymentMode: 'AMC',
-    Technician: 'Siva', 
-    CustomerName: 'Deepa', 
-    CustomerPhoneNo: 'N/A', 
-    CustomerSignature: 'N/A', 
-    TechnicianSignature:'N/A',
-    TechnicianPhoneNo:'N/A',
-    FieldBeforePhoto:'N/A',
-    FieldAfterPhoto:'N/A'
-  },
-  { 
-    Products: 'HP',
-    OderID: 1238, 
-    FromDate: new Date('2023-08-05'), 
-    ToDate: new Date('2023-08-09'),    
-    Status: 'Assigned',
-    CompanyDetails: 'Abelco Equipment Trading LLC 1006597086 abelco.me 9HW8+CQ8 - Shop #1 - ??????? - ????? -  United Arab Emirates admin@abelco.me',
-    CustomerDetails :'Ajman - United Arab Emirates',
-    WorkMode :'New Installation',
-    TaskName :'Trial',
-    PaymentMode: 'AMC',
-    Technician: 'Manu', 
-    CustomerName: 'Deepa', 
-    CustomerPhoneNo: 'N/A', 
-    CustomerSignature: 'N/A', 
-    TechnicianSignature:'N/A',
-    TechnicianPhoneNo:'N/A',
-    FieldBeforePhoto:'N/A',
-    FieldAfterPhoto:'N/A'
-  },
-  { 
-    Products: 'HP',
-    OderID: 1238, 
-    FromDate: new Date('2023-08-05'), 
-    ToDate: new Date('2023-08-09'),    
-    Status: 'Assigned',
-    CompanyDetails: 'Abelco Equipment Trading LLC 1006597086 abelco.me 9HW8+CQ8 - Shop #1 - ??????? - ????? -  United Arab Emirates admin@abelco.me',
-    CustomerDetails :'Ajman - United Arab Emirates',
-    WorkMode :'New Installation',
-    TaskName :'Trial',
-    PaymentMode: 'AMC',
-    Technician: 'Manu', 
-    CustomerName: 'Deepa', 
-    CustomerPhoneNo: 'N/A', 
-    CustomerSignature: 'N/A', 
-    TechnicianSignature:'N/A',
-    TechnicianPhoneNo:'N/A',
-    FieldBeforePhoto:'N/A',
-    FieldAfterPhoto:'N/A'
-  },  { 
-    Products: 'HP',
-    OderID: 1238, 
-    FromDate: new Date('2023-08-05'), 
-    ToDate: new Date('2023-08-09'),    
-    Status: 'Assigned',
-    CompanyDetails: 'Abelco Equipment Trading LLC 1006597086 abelco.me 9HW8+CQ8 - Shop #1 - ??????? - ????? -  United Arab Emirates admin@abelco.me',
-    CustomerDetails :'Ajman - United Arab Emirates',
-    WorkMode :'New Installation',
-    TaskName :'Trial',
-    PaymentMode: 'AMC',
-    Technician: 'Manu', 
-    CustomerName: 'Deepa', 
-    CustomerPhoneNo: 'N/A', 
-    CustomerSignature: 'N/A', 
-    TechnicianSignature:'N/A',
-    TechnicianPhoneNo:'N/A',
-    FieldBeforePhoto:'N/A',
-    FieldAfterPhoto:'N/A'
-  },  { 
-    Products: 'HP',
-    OderID: 1238, 
-    FromDate: new Date('2023-08-05'), 
-    ToDate: new Date('2023-08-09'),    
-    Status: 'Assigned',
-    CompanyDetails: 'Abelco Equipment Trading LLC 1006597086 abelco.me 9HW8+CQ8 - Shop #1 - ??????? - ????? -  United Arab Emirates admin@abelco.me',
-    CustomerDetails :'Ajman - United Arab Emirates',
-    WorkMode :'New Installation',
-    TaskName :'Trial',
-    PaymentMode: 'AMC',
-    Technician: 'Manu', 
-    CustomerName: 'Deepa', 
-    CustomerPhoneNo: 'N/A', 
-    CustomerSignature: 'N/A', 
-    TechnicianSignature:'N/A',
-    TechnicianPhoneNo:'N/A',
-    FieldBeforePhoto:'N/A',
-    FieldAfterPhoto:'N/A'
-  },  { 
-    Products: 'HP',
-    OderID: 1238, 
-    FromDate: new Date('2023-08-05'), 
-    ToDate: new Date('2023-08-09'),    
-    Status: 'Assigned',
-    CompanyDetails: 'Abelco Equipment Trading LLC 1006597086 abelco.me 9HW8+CQ8 - Shop #1 - ??????? - ????? -  United Arab Emirates admin@abelco.me',
-    CustomerDetails :'Ajman - United Arab Emirates',
-    WorkMode :'New Installation',
-    TaskName :'Trial',
-    PaymentMode: 'AMC',
-    Technician: 'Manu', 
-    CustomerName: 'Deepa', 
-    CustomerPhoneNo: 'N/A', 
-    CustomerSignature: 'N/A', 
-    TechnicianSignature:'N/A',
-    TechnicianPhoneNo:'N/A',
-    FieldBeforePhoto:'N/A',
-    FieldAfterPhoto:'N/A'
-  },
- 
-];
 
 @Component({
   selector: 'app-dashboard',
@@ -178,21 +19,39 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class DashboardComponent {
   displayedColumns: string[] = ['Products','OderID','FromDate','ToDate', 'Technician', 'Status', 'Action'];
+  usernameOptions: { id: number; first_name: string }[] = [];
+  itemCountText = ''; 
+  onProcessCount: number = 0; // To store the count of items on process
+  assignedCount: number = 0; // To store the count of items assigned
   @ViewChild('picker') picker: any; // Use appropriate type
   
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-
+  ELEMENT_DATA: PeriodicElement[] = [];
   
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   DashboardForm = new FormGroup({
     FromDate: new FormControl(),
     ToDate: new FormControl(),
   });
 
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog,private http: HttpClient,private router: Router) {
   }
-
+  ngOnInit(): void {
+    // Fetch data from the API when the component is initialized
+    this.fetchDataFromAPI();
+    this.fetchEmployeeUsernames()
+    this.fetchCounts();
+  }
+  navigateToAssignedTask() {
+    this.router.navigate(['/assignedtask']);
+  }
+  navigateToonprocessTask() {
+    this.router.navigate(['/onprocesstask']);
+  }
+  navigateToReports() {
+    this.router.navigate(['/reports']);
+  }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -203,13 +62,21 @@ export class DashboardComponent {
     const toDate: Date | null = this.DashboardForm.controls['ToDate'].value;
 
     if (fromDate && toDate) {
+      debugger;
+      
+      console.log('From Date:', fromDate);
+      console.log('To Date:', toDate);
+
+    // Log the data before filtering
+      console.log('Data before filtering:', this.dataSource.filteredData);
       this.dataSource.filterPredicate = (data: PeriodicElement) => {
-        return data.FromDate >= fromDate && data.ToDate <= toDate;
+        return data.completion_date >= fromDate && data.completion_date <= toDate;
       };
 
       this.dataSource.filter = 'filter'; // Trigger the filter
     }
   }
+  
 
   clearDateRangeFilter() {
     this.DashboardForm.reset();
@@ -228,5 +95,60 @@ export class DashboardComponent {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
+  fetchDataFromAPI(): void {
+    // Make an HTTP GET request to your Django API endpoint
+    this.http
+      .get<PeriodicElement[]>('https://albecoservice.com/albecoproject/jobapi/jobapi/CompletedJobCardViewSet/')
+      .subscribe(
+        (data) => {
+          this.ELEMENT_DATA = data;
+          this.dataSource.data = this.ELEMENT_DATA.slice();
+          const itemCount = this.ELEMENT_DATA.length;
+          if (itemCount > 100) {
+            this.itemCountText = '100+';
+          } else {
+            this.itemCountText = itemCount.toString();
+          }
+        },
+        (error) => {
+          console.error('Error fetching data from API:', error);
+        }
+      );
+  }
 
+  fetchEmployeeUsernames(): void {
+    this.http.get<{ id: number; first_name: string }[]>('https://albecoservice.com/albecoproject/userapi/employee-usernames/').subscribe(
+      (data) => {
+    this.usernameOptions = data;
+    console.log('usernameOptions:', this.usernameOptions);
+      },
+      (error) => {
+        console.error('Error fetching employee usernames:', error);
+      }
+    );
+  }
+  getUsernameById(employeeId: number | null): string {
+    if (!employeeId || !this.usernameOptions) {
+      return ''; // Handle cases where employeeId is null or options are not loaded yet
+    }
+  
+    const user = this.usernameOptions.find((user) => user.id === employeeId);
+    return user ? user.first_name : ''; // Return the username if found
+  }
+
+  fetchCounts(): void {
+    // Make an HTTP GET request to fetch on process and assigned counts
+    this.http
+      .get<any>('https://albecoservice.com/albecoproject/jobapi/counts/')
+      .subscribe(
+        (data) => {
+          // Extract and store the counts
+          this.onProcessCount = data.onProcessCount;
+          this.assignedCount = data.assignedCount;
+        },
+        (error) => {
+          console.error('Error fetching counts from API:', error);
+        }
+      );
+  }
 }

@@ -18,6 +18,11 @@ import { AddTaskComponent } from './assigned-task/add-task/add-task.component';
 import { EditTaskComponent } from './assigned-task/edit-task/edit-task.component';
 import { DeleteTaskComponent } from './assigned-task/delete-task/delete-task.component';
 import { LoginComponent } from './login/login.component';
+import { OnprocessComponent } from './on-process/on-process.component';
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { ReportsComponent} from './reports/reports.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -32,8 +37,12 @@ import { LoginComponent } from './login/login.component';
     AddTaskComponent,
     EditTaskComponent,
     DeleteTaskComponent,
-    LoginComponent
+    LoginComponent,
+    OnprocessComponent,
+    ReportsComponent,
   ],
+
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -42,6 +51,9 @@ import { LoginComponent } from './login/login.component';
     ReactiveFormsModule,
     PdfViewerModule,
     FormsModule,
+    HttpClientModule,
+    CommonModule,
+    MatDialogModule,
   ],
   providers: [],
   entryComponents: [

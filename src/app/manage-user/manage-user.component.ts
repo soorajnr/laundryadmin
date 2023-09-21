@@ -7,6 +7,7 @@ import { DeleteConfirmationDialogComponent } from './delete-confirmation-dialog/
 import { EditUserDialogComponent } from './edit-user-dialog/edit-user-dialog.component';
 import { AddUserDialogComponent } from './add-user-dialog/add-user-dialog.component';
 import { MatPaginator } from '@angular/material/paginator';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-manage-user',
@@ -14,28 +15,17 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrls: ['./manage-user.component.scss']
 })
 export class ManageUserComponent {
-  displayedColumns: string[] = ['username', 'password', 'location', 'Action'];
+  displayedColumns: string[] = ['username', 'id', 'first_name','last_name' ];
 
   addUserForm: FormGroup;
   manageUserForm: FormGroup;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  
-   ELEMENT_DATA: PeriodicElement[] = [
-    {username: 'sooraj', password: 'test123#', location: 'thrissur'},
-    {username: 'deepak', password: 'test123#', location: 'EKM'},
-    {username: 'Appu', password: 'test123#', location: 'PUK'},
-    {username: 'jeevan', password: 'test123#', location: 'INK'},
-    {username: 'manu', password: 'test123#', location: 'Ollur'},
-    {username: 'kiran', password: 'test123#', location: 'thrissur'},
-    {username: 'tito', password: 'test123#', location: 'thrissur'},
-    {username: 'jhon', password: 'test123#', location: 'thrissur'},
-    {username: 'deo', password:'test123#', location: 'thrissur'},
-    { username: 'Neon', password: 'test123#', location: 'thrissur'},
-  ];
+  ELEMENT_DATA: PeriodicElement[] = [];
+   
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   formBuilder: any;
-  constructor(private fb: FormBuilder, private dialog: MatDialog) {
+  constructor(private fb: FormBuilder, private dialog: MatDialog,private http: HttpClient,) {
     
        this.manageUserForm = this.fb.group({
         // username: ['', Validators.required],
@@ -44,13 +34,16 @@ export class ManageUserComponent {
       });
       this.addUserForm = this.fb.group({
         position: ['', Validators.required],
-        username: ['', Validators.required],
-        password: ['', Validators.required],
-        location: ['', Validators.required]
+        id: ['', Validators.required],
+        first_name: ['', Validators.required],
+        last_name: ['', Validators.required]
       });
   }
 
-
+  ngOnInit(): void {
+    // Fetch data from the API when the component is initialized
+    this.fetchDataFromAPI();
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -102,5 +95,18 @@ export class ManageUserComponent {
     this.dataSource.paginator = this.paginator;
   }
   
-  
+  fetchDataFromAPI(): void {
+    // Make an HTTP GET request to your Django API endpoint
+    this.http
+      .get<PeriodicElement[]>('https://albecoservice.com/albecoproject/userapi/employee-usernames/')
+      .subscribe(
+        (data) => {
+          this.ELEMENT_DATA = data;
+          this.dataSource.data = this.ELEMENT_DATA.slice();
+        },
+        (error) => {
+          console.error('Error fetching data from API:', error);
+        }
+      );
+  }
 }

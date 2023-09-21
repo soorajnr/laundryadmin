@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ReportsComponent } from './reports.component';
+import { OnprocessComponent } from './on-process.component';
 
 
-describe('ReportsComponent', () => {
-  let component: ReportsComponent;
-  let fixture: ComponentFixture<ReportsComponent>;
+describe('OnprocessComponent', () => {
+  let component: OnprocessComponent;
+  let fixture: ComponentFixture<OnprocessComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ReportsComponent ]
+      declarations: [ OnprocessComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ReportsComponent);
+    fixture = TestBed.createComponent(OnprocessComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

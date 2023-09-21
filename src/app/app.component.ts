@@ -21,7 +21,7 @@ export class AppComponent {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
-      debugger;
+      
       this.isLoginPage = this.route.snapshot.firstChild?.routeConfig?.path === 'login';
     });
   }

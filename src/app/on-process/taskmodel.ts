@@ -1,5 +1,4 @@
 export interface PeriodicElement {
-    id:number;
     property: string;
     location: string;
     username: string;

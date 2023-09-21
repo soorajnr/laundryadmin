@@ -1,26 +1,31 @@
-import { Component, EventEmitter, Inject, Output } from '@angular/core';
+import { Component, Inject, Output, EventEmitter } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PeriodicElement } from '../usermodel';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-user-dialog',
   templateUrl: './add-user-dialog.component.html',
 })
 export class AddUserDialogComponent {
-  @Output() addUserEvent = new EventEmitter<PeriodicElement>();
+  @Output() addUserEvent = new EventEmitter<any>();
 
   addUserForm: FormGroup;
-
+  userRoles: string[] = ['employee', 'manager'];
   constructor(
     private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<AddUserDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private http: HttpClient
   ) {
     this.addUserForm = this.formBuilder.group({
       username: ['', Validators.required],
-      password: ['', Validators.required],
-      location: ['', Validators.required]
+      first_name: ['', Validators.required],
+      last_name: ['', Validators.required],
+      email: ['', Validators.required],
+      password1: ['', Validators.required],
+      password2: ['', Validators.required],
+      user_role: ['', Validators.required]
     });
   }
 
@@ -31,10 +36,16 @@ export class AddUserDialogComponent {
   onAddUserClick(): void {
     if (this.addUserForm.valid) {
       const newUser = this.addUserForm.value;
-      this.addUserEvent.emit(newUser); 
-      console.log('New User Data:', newUser);
-      this.dialogRef.close();
+
+      this.http.post('https://albecoservice.com/albecoproject/userapi/usercreation/', newUser).subscribe(
+        (response) => {
+          console.log('Response from backend:', response);
+          this.dialogRef.close();
+        },
+        (error) => {
+          console.error('Error:', error);
+        }
+      );
     }
   }
-  
 }
