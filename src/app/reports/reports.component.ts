@@ -131,7 +131,7 @@ export class ReportsComponent {
   fetchDataFromAPI(): void {
     // Make an HTTP GET request to your Django API endpoint
     this.http
-      .get<PeriodicElement[]>('https://albecoservice.com/albecoproject/jobapi/jobapi/CompletedJobCardViewSet/')
+      .get<PeriodicElement[]>('https://albecoservice.com/jobapi/jobapi/CompletedJobCardViewSet/')
       .subscribe(
         (data) => {
           this.ELEMENT_DATA = data;
