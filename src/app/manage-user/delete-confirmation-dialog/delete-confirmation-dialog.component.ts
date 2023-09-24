@@ -22,7 +22,7 @@ export class DeleteConfirmationDialogComponent {
 
   onDeleteUserClick(): void {
     // Send a DELETE request to the backend to delete the user
-    this.http.delete<void>(`https://albecoservice.com/albecoproject/userapi/delete-user/${this.user.id}`).subscribe(
+    this.http.delete<void>(`https://albecoservice.com/userapi/delete-user/${this.user.id}`).subscribe(
       () => {
         console.log(`User with ID ${this.user.id} deleted successfully`);
         this.deleteUserEvent.emit(this.user); // Emit the deleted user data

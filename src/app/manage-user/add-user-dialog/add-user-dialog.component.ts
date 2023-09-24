@@ -37,7 +37,7 @@ export class AddUserDialogComponent {
     if (this.addUserForm.valid) {
       const newUser = this.addUserForm.value;
 
-      this.http.post('https://albecoservice.com/albecoproject/userapi/usercreation/', newUser).subscribe(
+      this.http.post('https://albecoservice.com/userapi/usercreation/', newUser).subscribe(
         (response) => {
           console.log('Response from backend:', response);
           this.dialogRef.close();

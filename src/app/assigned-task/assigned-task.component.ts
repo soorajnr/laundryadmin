@@ -103,7 +103,7 @@ export class AssignedTaskComponent {
   fetchDataFromAPI(): void {
     // Make an HTTP GET request to your Django API endpoint
     this.http
-      .get<PeriodicElement[]>('https://albecoservice.com/albecoproject/jobapi/jobapi/AssignedJobCardViewSet/')
+      .get<PeriodicElement[]>('https://albecoservice.com/jobapi/jobapi/AssignedJobCardViewSet/')
       .subscribe(
         (data) => {
           this.ELEMENT_DATA = data;

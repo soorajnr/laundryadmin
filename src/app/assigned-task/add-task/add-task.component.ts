@@ -51,7 +51,7 @@ export class AddTaskComponent {
   //   }
   // }
   fetchEmployeeUsernames(): void {
-    this.http.get<{ id: number; first_name: string }[]>('https://albecoservice.com/albecoproject/userapi/employee-usernames/').subscribe(
+    this.http.get<{ id: number; first_name: string }[]>('https://albecoservice.com/userapi/employee-usernames/').subscribe(
       (data) => {
     this.usernameOptions = data;
     console.log('usernameOptions:', this.usernameOptions);
@@ -67,7 +67,7 @@ export class AddTaskComponent {
       const newTask = this.addTaskForm.value;
   
       // Make an HTTP POST request to your Django API endpoint
-      this.http.post('https://albecoservice.com/albecoproject/jobapi/jobapi/WorkAssainViewset/', newTask)
+      this.http.post('https://albecoservice.com/jobapi/jobapi/WorkAssainViewset/', newTask)
         .subscribe(
           (response) => {
             // Handle the response from the backend (success)

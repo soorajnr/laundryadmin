@@ -98,7 +98,7 @@ export class DashboardComponent {
   fetchDataFromAPI(): void {
     // Make an HTTP GET request to your Django API endpoint
     this.http
-      .get<PeriodicElement[]>('https://albecoservice.com/albecoproject/jobapi/jobapi/CompletedJobCardViewSet/')
+      .get<PeriodicElement[]>('https://albecoservice.com/jobapi/jobapi/CompletedJobCardViewSet/')
       .subscribe(
         (data) => {
           this.ELEMENT_DATA = data;
@@ -117,7 +117,7 @@ export class DashboardComponent {
   }
 
   fetchEmployeeUsernames(): void {
-    this.http.get<{ id: number; first_name: string }[]>('https://albecoservice.com/albecoproject/userapi/employee-usernames/').subscribe(
+    this.http.get<{ id: number; first_name: string }[]>('https://albecoservice.com/userapi/employee-usernames/').subscribe(
       (data) => {
     this.usernameOptions = data;
     console.log('usernameOptions:', this.usernameOptions);
@@ -139,7 +139,7 @@ export class DashboardComponent {
   fetchCounts(): void {
     // Make an HTTP GET request to fetch on process and assigned counts
     this.http
-      .get<any>('https://albecoservice.com/albecoproject/jobapi/counts/')
+      .get<any>('https://albecoservice.com/jobapi/counts/')
       .subscribe(
         (data) => {
           // Extract and store the counts

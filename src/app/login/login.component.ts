@@ -35,7 +35,7 @@ export class LoginComponent {
     
    
 
-    this.http.post<any>('https://albecoservice.com/albecoproject/userapi/login/', credentials, ).subscribe(
+    this.http.post<any>('https://albecoservice.com/userapi/login/', credentials, ).subscribe(
     // this.http.post<any>('http://127.0.0.1:8000/login/', credentials, ).subscribe(
       (response) => {
         const userGroups = response.user.groups;

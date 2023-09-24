@@ -98,7 +98,7 @@ export class ManageUserComponent {
   fetchDataFromAPI(): void {
     // Make an HTTP GET request to your Django API endpoint
     this.http
-      .get<PeriodicElement[]>('https://albecoservice.com/albecoproject/userapi/employee-usernames/')
+      .get<PeriodicElement[]>('https://albecoservice.com/userapi/employee-usernames/')
       .subscribe(
         (data) => {
           this.ELEMENT_DATA = data;
