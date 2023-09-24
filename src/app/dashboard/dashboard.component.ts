@@ -42,7 +42,8 @@ export class DashboardComponent {
     this.fetchCounts();
     this.DashboardForm = this.fb.group({
       FromDate: [''], // Initial value for FromDate control
-      ToDate: ['']   // Initial value for ToDate control
+      ToDate: [''],
+      CmnSearch:[''],   // Initial value for ToDate control
   });
   }
   navigateToAssignedTask() {
@@ -55,6 +56,7 @@ export class DashboardComponent {
     this.router.navigate(['/reports']);
   }
   applyFilter(event: Event) {
+    debugger;
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
@@ -93,9 +95,13 @@ export class DashboardComponent {
   
 
   clearDateRangeFilter() {
-    // this.DashboardForm.reset();
-    //this.dataSource.filterPredicate = null;
+    this.DashboardForm.reset();
+    this.dataSource.data = this.ELEMENT_DATA;
     this.dataSource.filter = '';
+    const cmnSearchControl = this.DashboardForm.get('CmnSearch');
+    if (cmnSearchControl) {
+      cmnSearchControl.setValue('');
+    }
   }
   
   viewDetails(rowData: PeriodicElement) {
