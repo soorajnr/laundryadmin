@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DetailDialogComponentComponent } from './detail-dialog-component/detail-dialog-component.component';
 import { PeriodicElement } from './dashboardmodel';
@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
-  displayedColumns: string[] = ['Products','OderID','FromDate','ToDate', 'Technician', 'Status', 'Action'];
+  displayedColumns: string[] = ['Products','OderID','StartDate','CompletedDate', 'Technician', 'Status', 'Action'];
   usernameOptions: { id: number; first_name: string }[] = [];
   itemCountText = ''; 
   onProcessCount: number = 0; // To store the count of items on process
@@ -28,20 +28,22 @@ export class DashboardComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ELEMENT_DATA: PeriodicElement[] = [];
-  
-  dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-  DashboardForm = new FormGroup({
-    FromDate: new FormControl(),
-    ToDate: new FormControl(),
-  });
+  DashboardForm!: FormGroup;
 
-  constructor(private dialog: MatDialog,private http: HttpClient,private router: Router) {
+  dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+
+
+  constructor(private dialog: MatDialog,private http: HttpClient,private router: Router, private fb: FormBuilder) {
   }
   ngOnInit(): void {
     // Fetch data from the API when the component is initialized
     this.fetchDataFromAPI();
     this.fetchEmployeeUsernames()
     this.fetchCounts();
+    this.DashboardForm = this.fb.group({
+      FromDate: [''], // Initial value for FromDate control
+      ToDate: ['']   // Initial value for ToDate control
+  });
   }
   navigateToAssignedTask() {
     this.router.navigate(['/assignedtask']);
@@ -57,29 +59,41 @@ export class DashboardComponent {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
  
+  formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is 0-based
+    const day = String(date.getDate()).padStart(2, '0');
+    
+    return `${year}-${month}-${day}`;
+  }
+  
   applyDateRangeFilter() {
-    const fromDate: Date | null = this.DashboardForm.controls['FromDate'].value;
-    const toDate: Date | null = this.DashboardForm.controls['ToDate'].value;
-
-    if (fromDate && toDate) {
-      debugger;
-      
-      console.log('From Date:', fromDate);
-      console.log('To Date:', toDate);
-
-    // Log the data before filtering
-      console.log('Data before filtering:', this.dataSource.filteredData);
-      this.dataSource.filterPredicate = (data: PeriodicElement) => {
-        return data.completion_date >= fromDate && data.completion_date <= toDate;
-      };
-
-      this.dataSource.filter = 'filter'; // Trigger the filter
+    const fromDateControl = this.DashboardForm.get('FromDate');
+    const toDateControl = this.DashboardForm.get('ToDate');
+  
+    if (fromDateControl && toDateControl) {
+      const fromDate = fromDateControl.value;
+      const toDate = toDateControl.value;
+  
+      // Format fromDate and toDate
+      const formattedFromDate = this.formatDate(new Date(fromDate));
+      const formattedToDate = this.formatDate(new Date(toDate));
+  
+      // Filter the data based on the date range (formattedFromDate to formattedToDate)
+      this.dataSource.data = this.ELEMENT_DATA.filter((element) => {
+        const startDate = new Date(element.assigned_date);
+        const completedDate = new Date(element.completion_date);
+        const formattedStartDate = this.formatDate(startDate);
+        const formattedCompletedDate = this.formatDate(completedDate);
+        return formattedStartDate >= formattedFromDate && formattedCompletedDate <= formattedToDate;
+      });
     }
   }
   
+  
 
   clearDateRangeFilter() {
-    this.DashboardForm.reset();
+    // this.DashboardForm.reset();
     //this.dataSource.filterPredicate = null;
     this.dataSource.filter = '';
   }
